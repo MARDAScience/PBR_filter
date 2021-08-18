@@ -1,8 +1,11 @@
 # "PBR" filter
 {P}ansharpening by {B}ackground {R}emoval algorithm for sharpening RGB images
 
+By Daniel Buscombe
+
 Sample imagery comes from the [Aeroscapes dataset](https://github.com/ishann/aeroscapes) and processed with the PBR filter using default settings
-![](https://github.com/dbuscombe-usgs/PBR_filter/releases/download/0.0.0/short_small.gif)
+<!-- ![](https://github.com/dbuscombe-usgs/PBR_filter/releases/download/0.0.0/short_small.gif) -->
+![](https://github.com/dbuscombe-usgs/PBR_filter/releases/download/0.0.01/aeroscapes_resized.gif)
 
 1. Read image, wavelet denoise, and convert to HSV
 2. Do 'inverted background subtraction' on the V (intensity) channel
