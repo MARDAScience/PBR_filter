@@ -1,20 +1,20 @@
 # "PBR" filter
 {P}ansharpening by {B}ackground {R}emoval algorithm for sharpening RGB images
 
+Sample imagery comes from the [Aeroscapes dataset](https://github.com/ishann/aeroscapes) and processed with the PBR filter using default settings
+![](https://github.com/dbuscombe-usgs/PBR_filter/releases/download/0.0.0/short_small.gif)
 
 1. Read image, wavelet denoise, and convert to HSV
 2. Do 'inverted background subtraction' on the V (intensity) channel
 3. combine with HS, convert to RGB
 
-The effect is to sharpen details of object boundaries/transitions, brighten, and recolour
+The effect is to sharpen details of object boundaries/transitions, brighten, and recolour. But, without changing the overall distribution of values within the image (i.e. the range), and recolouring in an internally consistent (deterministic) way
 
-But without changing the overall distribution of values within the image (i.e. the range), and recolouring in an internally consistent (deterministic) way
-
-Sample 'Madeira' imagery comes from https://coastal.er.usgs.gov/data-release/doi-P9L474WC/
+Sample 'Madeira' imagery comes from [this USGS data release by Brown et al](https://coastal.er.usgs.gov/data-release/doi-P9L474WC/)
 
 ![](PBR.jpg)
 
-Sample 'OBX' imagery comes from https://www.sciencebase.gov/catalog/item/6037cca0d34eb12031175133
+Sample 'OBX' imagery comes from [this USGS data release by Ritchie et al](https://www.sciencebase.gov/catalog/item/6037cca0d34eb12031175133)
 
 ![](PBR2.jpg)
 
@@ -30,6 +30,9 @@ B. Create new `pbr` conda environment
 We'll create a new conda environment and install packages into it from conda-forge
 
 `conda env create -f install/pbr.yml`
+
+activate:
+
 `conda activate pbr`
 
 1. Run the program
@@ -64,10 +67,29 @@ In the figure below, the process is broken into stages
 ![](example/20180619_MadeiraBeachFL_ortho_5cm_10_12_filt_fig_breakdown.png)
 
 a) original image
+
 b) wavelet denoised image, where noise over a range of scales is removed and mostly affects very small scale (pixel level) noise. This step isnt crucial but I always like to denoise imagery if I can as a precaution
+
 c) the greyscale background image that has been created with a rolling ball filter with ball of radius [whatever]
+
 d) greyscale version of the denoised image
-e) the intensity image that is the greyscale divided by the greyscale background image
+
+e) the intensity image that is the greyscale divided by the greyscale background image. This image accentuates edges and makes intervening areas almost uniformly bright  
+
 f) the filtered RGB image that is the result of swapping the greyscale with the intensity image in the HSV stack of the original RGB image, then converting that into RGB colorspace
+
+
+Here's another example (from a 1m NAIP image)
+
+Original image of a saltmarsh environment
+![](example/chunk16_m_3307955_sw_17_1_20150528_multiband_romaine_site121.jpg)
+
+The filter with default radius of 3 pixels creates this PBR image
+![](example/chunk16_m_3307955_sw_17_1_20150528_multiband_romaine_site121_filt.png)
+
+In the figure below, the process is broken into stages
+![](example/chunk16_m_3307955_sw_17_1_20150528_multiband_romaine_site121_filt_fig_breakdown.png)
+
+
 
 *disclaimer*: I do not know if I have reinvented the wheel - I have not searched for similar implementations. Please tell me by opening an Issue if this technique has previously been proposed
