@@ -53,14 +53,15 @@ see the png images the program makes inside the same directory as the input imag
 
 ## How does this work?
 
+
 Let's take this image, which is a tile cropped out of a larger orthomosaic - see [here](https://coastal.er.usgs.gov/data-release/doi-P9L474WC/):
-![][example/20180619_MadeiraBeachFL_ortho_5cm_10_12.jpg]
+![](example/20180619_MadeiraBeachFL_ortho_5cm_10_12.jpg)
 
 The filter with default radius of 3 pixels creates this PBR image
-![][example/20180619_MadeiraBeachFL_ortho_5cm_10_12_filt.png]
+![](example/20180619_MadeiraBeachFL_ortho_5cm_10_12_filt.png)
 
 In the figure below, the process is broken into stages
-![][example/20180619_MadeiraBeachFL_ortho_5cm_10_12_filt_fig_breakdown.png]
+![](example/20180619_MadeiraBeachFL_ortho_5cm_10_12_filt_fig_breakdown.png)
 
 a) original image
 b) wavelet denoised image, where noise over a range of scales is removed and mostly affects very small scale (pixel level) noise. This step isnt crucial but I always like to denoise imagery if I can as a precaution
